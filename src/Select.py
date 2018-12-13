@@ -22,16 +22,12 @@ class Select(Relation):
 
         self.condition = "{0}={1}".format(attr1.name, attr2.name)
         
-
     def check_compatibility(self):
         argtype = {}
         details = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
         for i in details:
             argtype[i[1]]=i[2]
         return argtype[self.attr1.name] == argtype[self.attr2.name]
-
-
-
 
     def compile(self):
         return "SELECT * FROM {0} WHERE {1}".format(self.subrelation.compile(), self.condition)
