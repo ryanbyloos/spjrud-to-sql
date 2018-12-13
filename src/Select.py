@@ -24,7 +24,8 @@ class Select(Relation):
         
     def check_compatibility(self):
         argtype = {}
-        details = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
+        pragma_list = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
+        details = Database.db.c.fetchall()
         for i in details:
             argtype[i[1]] = i[2]
         return argtype[self.attr1.name] == argtype[self.attr2.name]
