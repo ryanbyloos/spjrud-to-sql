@@ -16,4 +16,5 @@ def set_db(db_name):
     Database.db = Database(db_name)
     conn = sql.connect(db_name+'.db')
     c = conn.cursor()
+    Database.db.c = c
     return c
