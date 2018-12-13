@@ -12,7 +12,7 @@ from src.Constant   import Constant
 from src.Database   import Database, db
 
 
-def set_db(db_name):
+def setup(db_name):
     Database.db = Database(db_name)
     conn = sql.connect(db_name+'.db')
     c = conn.cursor()
