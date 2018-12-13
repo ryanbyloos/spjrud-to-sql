@@ -5,7 +5,6 @@ class Project(Relation):
     def __init__(self, attr_list, subrelation):
 
         self.attr = ""
-        self.attr_list, self.subrelation = attr_list, subrelation
 
         if not isinstance(attr_list, list):
             raise TypeError('The first argument must be a list of attributes.')
@@ -17,6 +16,7 @@ class Project(Relation):
             self.attr+=e.name
             self.attr+=", "
         self.attr = self.attr[:-2] # There is one useless ", "
+        self.subrelation = subrelation
         
     def compile(self):
         return "SELECT {0} FROM ({1})".format(self.attr, self.subrelation.compile())
