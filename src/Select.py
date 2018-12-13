@@ -26,7 +26,7 @@ class Select(Relation):
         argtype = {}
         details = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
         for i in details:
-            argtype[i[1]]=i[2]
+            argtype[i[1]] = i[2]
         return argtype[self.attr1.name] == argtype[self.attr2.name]
 
     def compile(self):
