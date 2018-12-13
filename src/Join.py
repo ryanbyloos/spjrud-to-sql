@@ -10,4 +10,4 @@ class Join(Relation):
             raise TypeError('The subrelations must be relations')
     
     def compile(self):
-        return "SELECT * FROM ({0} Natural JOIN {1})".format(self.subrelation1.compile, self.subrelation2.compile)
+        return "SELECT * FROM ({0} Natural JOIN {1})".format(self.subrelation1.compile(), self.subrelation2.compile())

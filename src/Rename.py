@@ -15,4 +15,4 @@ class Rename(Relation):
 
     def compile(self):
         return "ALTER TABLE ({0})\
-                RENAME COLUMN {1} TO {2}".format(self.subrelation, self.attr.name, self.new_name)
+                RENAME COLUMN {1} TO {2}".format(self.subrelation.compile(), self.attr.name, self.new_name)
