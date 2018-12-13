@@ -1,5 +1,6 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
+from src.Database import db
 
 class Project(Relation):
     def __init__(self, attr_list, subrelation):
@@ -23,7 +24,7 @@ class Project(Relation):
 
     def check_args(self):
         argtype = {}
-        details = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
+        details = db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
         for i in details:
             argtype[i[1]] = i[2]
         for j in self.attr_list:

@@ -1,7 +1,7 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
 from src.Constant import Constant
-from src.Database import Database, db
+from src.Database import db
 
 class Select(Relation):
     def __init__(self, attr1, attr2, subrelation):
@@ -24,8 +24,8 @@ class Select(Relation):
         
     def check_compatibility(self):
         argtype = {}
-        pragma_list = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
-        details = Database.db.c.fetchall()
+        pragma_list = db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
+        details = db.c.fetchall()
         for i in details:
             argtype[i[1]] = i[2]
         return argtype[self.attr1.name] == argtype[self.attr2.name]

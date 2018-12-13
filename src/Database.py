@@ -1,6 +1,5 @@
 import sqlite3 as sql
 
-
 class Database:
     def __init__(self, db_name):
         if db_name != None:
