@@ -2,6 +2,6 @@ class Relation():
 
     def __init__(self, name = ""):
         self.name = name
-        
-    def compile(self): #TODO
+
+    def compile(self):
         return self.name

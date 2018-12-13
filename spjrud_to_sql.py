@@ -9,11 +9,11 @@ from src.Union      import Union
 from src.Diff       import Diff
 from src.Attribute  import Attribute
 from src.Constant   import Constant
-from src.Database   import Database
+from src.Database   import Database, db
 
-conn = sql.connect('example.db')
-c = conn.cursor()
 
 def set_db(db_name):
     Database.db = Database(db_name)
-    c = Database.db.c
+    conn = sql.connect(db_name+'.db')
+    c = conn.cursor()
+    return c
