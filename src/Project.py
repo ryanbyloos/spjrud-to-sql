@@ -2,15 +2,21 @@ from src.Relation import Relation
 from src.Attribute import Attribute
 
 class Project(Relation):
-    def __init__(self, attr, subrelation):
+    def __init__(self, attr_list, subrelation):
 
-        self.attr, self.subrelation = attr, subrelation
+        self.attr = ""
+        self.attr_list, self.subrelation = attr_list, subrelation
 
-        if not isinstance(attr, Attribute):
-            raise TypeError('The first argument must be an attribute.')
+        if not isinstance(attr_list, list):
+            raise TypeError('The first argument must be a list of attributes.')
 
         if not isinstance(subrelation, Relation):
             raise TypeError('The subrelation must be a relation.')
+
+        for e in attr_list:
+            self.attr+=e.name
+            self.attr+=", "
+        self.attr = self.attr[:-2] # There is one useless ", "
         
     def compile(self):
-        return "SELECT {0} FROM ({1})".format(self.attr.name, self.subrelation.compile())
+        return "SELECT {0} FROM ({1})".format(self.attr, self.subrelation.compile())
