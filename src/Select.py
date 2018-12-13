@@ -1,5 +1,6 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
+from src.Constant import Constant
 
 class Select(Relation):
     def __init__(self, attr1, attr2, subrelation):
@@ -12,7 +13,7 @@ class Select(Relation):
         if not isinstance(self.subrelation, Relation):
             raise TypeError('The subrelation must be a relation.')
         
-        if isinstance(self.attr2, str): #TODO
+        if isinstance(self.attr2, Constant): #TODO
         #select "attribute = constant"
             pass
 
