@@ -33,7 +33,7 @@ class Select(Relation):
         try:
             argtype[self.attr1.name]
         except KeyError:
-            print(self.attr1.name+' isn\'t in the relation.')
+            raise Exception(self.attr1.name+' isn\'t in the relation.')
         if isinstance(self.attr2, Attribute):
             try:
                 argtype[self.attr2.name]
