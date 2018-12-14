@@ -1,6 +1,6 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
-from src.Database import db, Database
+from src.Database import Database, db
 
 
 class Project(Relation):
