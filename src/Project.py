@@ -7,14 +7,14 @@ class Project(Relation):
 
     def __init__(self, attr_list, subrelation):
 
+        self.subrelation, self.attr_list = subrelation, attr_list
+        self.check_args()
+
         self.attr = ""
-        for e in attr_list:
+        for e in self.attr_list:
             self.attr += e.name
             self.attr += ", "
         self.attr = self.attr[:-2]  # There is one useless ", "
-
-        self.subrelation, self.attr_list = subrelation, attr_list
-        self.check_args()
 
     def check_args(self):
 
@@ -35,6 +35,7 @@ class Project(Relation):
             "CREATE TABLE tmp AS SELECT * FROM ({0})".format(self.subrelation.compile()))
         Database.db.c.execute("PRAGMA table_info(tmp)")
         arglist = Database.db.c.fetchall()
+
         for i in arglist:
             argtype[i[1]] = i[2]
         for j in self.attr_list:
