@@ -12,9 +12,9 @@ from src.Constant import Constant as Cst
 from src.Database import Database, db
 
 
-def setup(db_name):
-    Database.db = Database(db_name)
-    conn = sql.connect(db_name+'.db')
+def set_db(db_name, ext='.db'):
+    Database.db = Database(db_name, ext)
+    conn = sql.connect(db_name+ext)
     c = conn.cursor()
     Database.db.c = c
     return c
