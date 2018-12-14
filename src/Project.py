@@ -42,7 +42,7 @@ class Project(Relation):
             try:
                 argtype[j.name]
             except KeyError:
-                print(j.name+' isn\'t in the relation.')
+                raise Exception(j.name+' isn\'t in the relation.')
 
     def compile(self):
         return "SELECT {0} FROM ({1})".format(self.attr, self.subrelation.compile())

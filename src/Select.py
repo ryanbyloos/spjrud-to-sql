@@ -38,7 +38,7 @@ class Select(Relation):
             try:
                 argtype[self.attr2.name]
             except KeyError:
-                print(self.attr2.name+' isn\'t in the relation.')
+                raise Exception(self.attr2.name+' isn\'t in the relation.')
 
     def compile(self):
         return "SELECT * FROM {0} WHERE {1}".format(self.subrelation.compile(), self.condition)
