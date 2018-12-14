@@ -56,7 +56,7 @@ It will automatically print the output of the query.
 
 |Operation | Arguments  |
 |--- | ---  |
-|Select | A list of attributes, a relation or a subquery.  |
+|Select | A list of attributes, a relation/subquery.  |
 |Project | An attribute, an attribute or a constant.  |
 |Join | A relation/subquery, a relation/subquery  |
 |Rename | An attribute, a string, a relation/subquery  |
