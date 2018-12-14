@@ -1,11 +1,14 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
+from src.Database import Database, db
+
 
 class Join(Relation):
+
     def __init__(self, subrelation1, subrelation2):
         self.subrelation1, self.subrelation2 = subrelation1, subrelation2
         self.check_args()
-    
+
     def check_args(self):
         if not (isinstance(self.subrelation1, Relation) or isinstance(self.subrelation2, Relation)):
             raise TypeError('The subrelations must be relations')

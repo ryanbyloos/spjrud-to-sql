@@ -1,11 +1,12 @@
 class Relation():
 
-    def __init__(self, name = ""):
+    def __init__(self, name=""):
+
         self.name = name
         self.check_args()
 
     def check_args(self):
-        
+
         if not isinstance(self.name, str):
             raise TypeError("A relation name must be a string.")
 
