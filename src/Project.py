@@ -6,24 +6,29 @@ class Project(Relation):
     def __init__(self, attr_list, subrelation):
 
         self.attr = ""
-
         for e in attr_list:
-            self.attr+=e.name
-            self.attr+=", "
+            self.attr += e.name
+            self.attr += ", "
         self.attr = self.attr[:-2] # There is one useless ", "
+
         self.subrelation, self.attr_list = subrelation, attr_list
-
-        if not isinstance(attr_list, list):
-            raise TypeError('The first argument must be a list of attributes.')
-
-        if not isinstance(subrelation, Relation):
-            raise TypeError('The subrelation must be a relation.')
-
         self.check_args()
 
     def check_args(self):
+
+        if not isinstance(self.attr_list, list):
+            raise TypeError('The first argument must be a list of attributes.')
+
+        for e in self.attr_list:
+            if not isinstance(e, Attribute):
+                raise TypeError('The first argument must be a list of attributes.')
+
+        if not isinstance(self.subrelation, Relation):
+            raise TypeError('The subrelation must be a relation.')
+        
         argtype = {}
-        details = Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
+        Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
+        details = Database.db.c.fetchall()
         for i in details:
             argtype[i[1]] = i[2]
         for j in self.attr_list:

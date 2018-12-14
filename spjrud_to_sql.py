@@ -1,14 +1,14 @@
 import sqlite3 as sql
 
-from src.Relation   import Relation
-from src.Select     import Select
-from src.Project    import Project
-from src.Join       import Join
-from src.Rename     import Rename
-from src.Union      import Union
-from src.Diff       import Diff
-from src.Attribute  import Attribute
-from src.Constant   import Constant
+from src.Select     import Select   as S
+from src.Project    import Project  as P
+from src.Join       import Join     as J
+from src.Rename     import Rename   as R
+from src.Union      import Union    as U
+from src.Diff       import Diff     as D
+from src.Relation   import Relation as Rel
+from src.Attribute  import Attribute as Attr
+from src.Constant   import Constant as Const
 from src.Database   import Database, db
 
 
