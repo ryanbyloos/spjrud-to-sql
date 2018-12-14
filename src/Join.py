@@ -27,7 +27,7 @@ class Join(Relation):
 
         for i in r1:
             for j in r2:
-                if i[1] == j[1] & & i[2] != j[2]:
+                if i[1] == j[1] and i[2] != j[2]:
                     raise TypeError(
                         'Two columns with the same name doesn\'t have the same type')
 
