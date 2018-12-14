@@ -54,11 +54,11 @@ It will automatically print the output of the query.
 
 ## Operation's arguments
 
-Operation | Arguments  
-- | -  
-Select | A list of attributes, a relation or a subquery.  
-Project | An attribute, an attribute or a constant.  
-Join | A relation/subquery, a relation/subquery  
-Rename | An attribute, a string, a relation/subquery  
-Union | A relation/subquery, a relation/subquery  
-Diff |  A relation/subquery, a relation/subquery
+|Operation | Arguments  |
+|--- | ---  |
+|Select | A list of attributes, a relation or a subquery.  |
+|Project | An attribute, an attribute or a constant.  |
+|Join | A relation/subquery, a relation/subquery  |
+|Rename | An attribute, a string, a relation/subquery  |
+|Union | A relation/subquery, a relation/subquery  |
+|Diff |  A relation/subquery, a relation/subquery  |
