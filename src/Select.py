@@ -11,10 +11,13 @@ class Select(Relation):
         self.check_args()
         
     def check_args(self):
+        Database.db.c.execute("DROP TABLE IF EXISTS tmp")
+        Database.db.c.execute("CREATE TABLE tmp AS SELECT * FROM ({0})".format(self.subrelation.compile()))
+        Database.db.c.execute("PRAGMA table_info(tmp)")
+        arglist = Database.db.c.fetchall()
+
         argtype = {}
-        Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
-        details = Database.db.c.fetchall()
-        for i in details:
+        for i in arglist:
             argtype[i[1]] = i[2]
 
         if not isinstance(self.attr1, Attribute):

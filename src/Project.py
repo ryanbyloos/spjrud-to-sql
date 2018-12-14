@@ -27,9 +27,11 @@ class Project(Relation):
             raise TypeError('The subrelation must be a relation.')
         
         argtype = {}
-        Database.db.c.execute("PRAGMA table_info({0})".format(self.subrelation.compile()))
-        details = Database.db.c.fetchall()
-        for i in details:
+        Database.db.c.execute("DROP TABLE IF EXISTS tmp")
+        Database.db.c.execute("CREATE TABLE tmp AS SELECT * FROM ({0})".format(self.subrelation.compile()))
+        Database.db.c.execute("PRAGMA table_info(tmp)")
+        arglist = Database.db.c.fetchall()
+        for i in arglist:
             argtype[i[1]] = i[2]
         for j in self.attr_list:
             try: 
