@@ -1,7 +1,7 @@
 # SPJRUD to SQL
 
 ## Purpose
-The purpose of this project is to build a simple library to convert Relational Algebra operations (SPJRUD) to SQL queries. The project present itself as a simple file to import in a project or in an interactive python console. See Usage for more information.
+The purpose of this project is to build a simple library to convert Relational Algebra operations (SPJRUD) to SQL queries. The project presents itself as a simple python library to import in a project or in an interactive python console. See Usage for more information.
 
 ## Used operations (SPJRUD)
 Below a list of the operations used in this project, with an explanation of what they are.
