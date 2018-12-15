@@ -57,6 +57,7 @@ From now you can use the provided relational algebra operations. Each operations
 [('abc',), ('def',), ('hij',)]
 ```
 It will automatically print the output of the query.
+If you want to get the last output, you can get it with the `Database.current.output` variable.
 
 ## Operation's arguments
 

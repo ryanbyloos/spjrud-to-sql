@@ -12,7 +12,8 @@ class Database:
     def query(self, spjrud_query):
         self.table = spjrud_query.compile()
         self.c.execute(spjrud_query.compile())
-        print(self.c.fetchall())
+        self.output = self.c.fetchall()
+        print(self.output)
 
 
 current = Database(None)
