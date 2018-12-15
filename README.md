@@ -36,7 +36,7 @@ A function is included to set a database cursor. By default, the extension of th
 >>> c = set_db('database')
 ```
 A file called "database.db" will then be created.
-#### Fill your database
+#### Fill or create your database
 If your database is empty, you can fill it with the given cursor.
 ```python
 >>> c.execute(''' CREATE TABLE Rouge (A TEXT, B TEXT, C NUMERIC)''')
@@ -44,10 +44,16 @@ If your database is empty, you can fill it with the given cursor.
 >>> c.execute("INSERT INTO Rouge VALUES ('def', 'nop', 2)")
 >>> c.execute("INSERT INTO Rouge VALUES ('hij', 'qrs', 3)")
 ```
-#### Start using SPJRUD operations.
-From now you can use the provided relational algebra operations. Each operations can be used with a provided function which simply is the first letter of the operation. So, for example, if you want to Select the attribute A in the relation called 'Rouge' :
+Additionally, you can use the `create_table()` function to create a table based on another table which already exist by using the spjrud functions.
 ```python
->>> s([Attr('A')], Rel('Rouge'))
+>>> create_table('Magenta', s(Attr('A'), Cst('abc'), Rel('Rouge')))
+[('abc', 'klm', 1)]
+Table Magenta successfully created.
+```
+#### Start using SPJRUD operations.
+From now you can use the provided relational algebra operations. Each operations can be used with a provided function which simply is the first letter of the operation. So, for example, if you want to project the attribute A in the relation called 'Rouge' :
+```python
+>>> p([Attr('A')], Rel('Rouge'))
 [('abc',), ('def',), ('hij',)]
 ```
 It will automatically print the output of the query.
