@@ -10,6 +10,7 @@ class Database:
             self.c = self.conn.cursor()
 
     def query(self, spjrud_query):
+        self.table = spjrud_query.compile()
         self.c.execute(spjrud_query.compile())
         print(self.c.fetchall())
 

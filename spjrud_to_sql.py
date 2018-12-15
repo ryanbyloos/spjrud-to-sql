@@ -22,35 +22,29 @@ def set_db(db_name, ext='.db'):
 
 def create_table(table_name, spjrud_query):
     Database.current.c.execute(
-        ''' CREATE TABLE {0} AS SELECT * FROM ({1}) '''.format(table_name, spjrud_query))
+        ''' CREATE TABLE {0} AS SELECT * FROM ({1}) '''.format(table_name, Database.current.table))
     print("Table {0} successfully created.".format(table_name))
 
 
 def s(attr1, attr2, subrelation):
     Database.current.query(Select(attr1, attr2, subrelation))
-    return Select(attr1, attr2, subrelation).compile()
 
 
 def p(attr_list, subrelation):
     Database.current.query(Project(attr_list, subrelation))
-    return Project(attr_list, subrelation).compile()
 
 
 def j(subrelation1, subrelation2):
     Database.current.query(Join(subrelation1, subrelation2))
-    return Join(subrelation1, subrelation2).compile()
 
 
 def r(attr, new_name, subrelation):
     Database.current.query(Rename(attr, new_name, subrelation))
-    return Rename(attr, new_name, subrelation).compile()
 
 
 def u(subrelation1, subrelation2):
     Database.current.query(Union(subrelation1, subrelation2))
-    return Union(subrelation1, subrelation2).compile()
 
 
 def d(subrelation1, subrelation2):
     Database.current.query(Diff(subrelation1, subrelation2))
-    return Diff(subrelation1, subrelation2).compile()
