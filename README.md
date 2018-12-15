@@ -62,8 +62,8 @@ It will automatically print the output of the query.
 
 |Operation | Arguments  |
 |--- | ---  |
-|Select | A list of attributes, a relation/subquery.  |
-|Project | An attribute, an attribute or a constant.  |
+|Select | An attribute, an attribute or a constant.  |
+|Project | A list of attributes, a relation/subquery.  |
 |Join | A relation/subquery, a relation/subquery  |
 |Rename | An attribute, a string, a relation/subquery  |
 |Union | A relation/subquery, a relation/subquery  |
