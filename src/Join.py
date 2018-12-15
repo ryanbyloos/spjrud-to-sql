@@ -1,6 +1,6 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
-from src.Database import Database, db
+from src.Database import Database, current
 
 
 class Join(Relation):
@@ -14,16 +14,16 @@ class Join(Relation):
             raise TypeError('The subrelations must be relations')
 
         argtype = {}
-        Database.db.c.execute("DROP TABLE IF EXISTS tmp1")
-        Database.db.c.execute("DROP TABLE IF EXISTS tmp2")
-        Database.db.c.execute(
+        Database.current.c.execute("DROP TABLE IF EXISTS tmp1")
+        Database.current.c.execute("DROP TABLE IF EXISTS tmp2")
+        Database.current.c.execute(
             "CREATE TABLE tmp1 AS SELECT * FROM ({0})".format(self.subrelation1.compile()))
-        Database.db.c.execute("PRAGMA table_info(tmp1)")
-        r1 = Database.db.c.fetchall()
-        Database.db.c.execute(
+        Database.current.c.execute("PRAGMA table_info(tmp1)")
+        r1 = Database.current.c.fetchall()
+        Database.current.c.execute(
             "CREATE TABLE tmp2 AS SELECT * FROM ({0})".format(self.subrelation2.compile()))
-        Database.db.c.execute("PRAGMA table_info(tmp2)")
-        r2 = Database.db.c.fetchall()
+        Database.current.c.execute("PRAGMA table_info(tmp2)")
+        r2 = Database.current.c.fetchall()
 
         for i in r1:
             for j in r2:

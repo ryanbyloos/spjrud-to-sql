@@ -1,7 +1,7 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
 from src.Constant import Constant
-from src.Database import Database, db
+from src.Database import Database, current
 
 
 class Select(Relation):
@@ -14,11 +14,11 @@ class Select(Relation):
     def check_args(self):
         if not isinstance(self.subrelation, Relation):
             raise TypeError('The subrelation must be a relation.')
-        Database.db.c.execute("DROP TABLE IF EXISTS tmp")
-        Database.db.c.execute(
+        Database.current.c.execute("DROP TABLE IF EXISTS tmp")
+        Database.current.c.execute(
             "CREATE TABLE tmp AS SELECT * FROM ({0})".format(self.subrelation.compile()))
-        Database.db.c.execute("PRAGMA table_info(tmp)")
-        arglist = Database.db.c.fetchall()
+        Database.current.c.execute("PRAGMA table_info(tmp)")
+        arglist = Database.current.c.fetchall()
         argtype = {}
         for i in arglist:
             argtype[i[1]] = i[2]

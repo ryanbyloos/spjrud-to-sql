@@ -9,5 +9,9 @@ class Database:
             self.conn = sql.connect(db_name+ext)
             self.c = self.conn.cursor()
 
+    def query(self, spjrud_query):
+        self.c.execute(spjrud_query.compile())
+        print(self.c.fetchall())
 
-db = Database(None)
+
+current = Database(None)

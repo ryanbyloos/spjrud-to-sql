@@ -1,6 +1,6 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
-from src.Database import Database, db
+from src.Database import Database, current
 
 
 class Rename(Relation):
@@ -32,11 +32,11 @@ class Rename(Relation):
                     'The new name is already taken in the relation.')
 
     def get_column_list(self):
-        Database.db.c.execute("DROP TABLE IF EXISTS tmp")
-        Database.db.c.execute(
+        Database.current.c.execute("DROP TABLE IF EXISTS tmp")
+        Database.current.c.execute(
             "CREATE TABLE tmp AS SELECT * FROM ({0})".format(self.subrelation.compile()))
-        Database.db.c.execute("PRAGMA table_info(tmp)")
-        self.col_list = Database.db.c.fetchall()
+        Database.current.c.execute("PRAGMA table_info(tmp)")
+        self.col_list = Database.current.c.fetchall()
         res = ''
         for c in self.col_list:
             res += c[1]

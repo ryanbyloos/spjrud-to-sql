@@ -1,6 +1,6 @@
 from src.Relation import Relation
 from src.Attribute import Attribute
-from src.Database import Database, db
+from src.Database import Database, current
 
 
 class Union(Relation):
@@ -13,17 +13,17 @@ class Union(Relation):
         if not (isinstance(self.subrelation1, Relation) or isinstance(self.subrelation2, Relation)):
             raise TypeError('The subrelations must be relations')
         argtype = {}
-        Database.db.c.execute("DROP TABLE IF EXISTS tmp1")
-        Database.db.c.execute("DROP TABLE IF EXISTS tmp2")
-        Database.db.c.execute(
+        Database.current.c.execute("DROP TABLE IF EXISTS tmp1")
+        Database.current.c.execute("DROP TABLE IF EXISTS tmp2")
+        Database.current.c.execute(
             "CREATE TABLE tmp1 AS SELECT * FROM ({0})".format(self.subrelation1.compile()))
-        Database.db.c.execute("PRAGMA table_info(tmp1)")
-        r1 = Database.db.c.fetchall()
+        Database.current.c.execute("PRAGMA table_info(tmp1)")
+        r1 = Database.current.c.fetchall()
         len_r1 = len(r1)
-        Database.db.c.execute(
+        Database.current.c.execute(
             "CREATE TABLE tmp2 AS SELECT * FROM ({0})".format(self.subrelation2.compile()))
-        Database.db.c.execute("PRAGMA table_info(tmp2)")
-        r2 = Database.db.c.fetchall()
+        Database.current.c.execute("PRAGMA table_info(tmp2)")
+        r2 = Database.current.c.fetchall()
         len_r2 = len(r2)
         if len_r1 != len_r2:
             raise ValueError(

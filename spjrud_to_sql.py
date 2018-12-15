@@ -9,41 +9,48 @@ from src.Diff import Diff
 from src.Relation import Relation as Rel
 from src.Attribute import Attribute as Attr
 from src.Constant import Constant as Cst
-from src.Database import Database, db
+from src.Database import Database, current
 
 
 def set_db(db_name, ext='.db'):
-    Database.db = Database(db_name, ext)
+    Database.current = Database(db_name, ext)
     conn = sql.connect(db_name+ext)
     c = conn.cursor()
-    Database.db.c = c
+    Database.current.c = c
     return c
 
 
-def query(spjrud_query):
-    Database.db.c.execute(spjrud_query.compile())
-    print(Database.db.c.fetchall())
+def create_table(table_name, spjrud_query):
+    Database.current.c.execute(
+        ''' CREATE TABLE {0} AS SELECT * FROM ({1}) '''.format(table_name, spjrud_query))
+    print("Table {0} successfully created.".format(table_name))
 
 
 def s(attr1, attr2, subrelation):
-    return query(Select(attr1, attr2, subrelation))
+    Database.current.query(Select(attr1, attr2, subrelation))
+    return Select(attr1, attr2, subrelation).compile()
 
 
 def p(attr_list, subrelation):
-    return query(Project(attr_list, subrelation))
+    Database.current.query(Project(attr_list, subrelation))
+    return Project(attr_list, subrelation).compile()
 
 
 def j(subrelation1, subrelation2):
-    return query(Join(subrelation1, subrelation2))
+    Database.current.query(Join(subrelation1, subrelation2))
+    return Join(subrelation1, subrelation2).compile()
 
 
 def r(attr, new_name, subrelation):
-    return query(Rename(attr, new_name, subrelation))
+    Database.current.query(Rename(attr, new_name, subrelation))
+    return Rename(attr, new_name, subrelation).compile()
 
 
 def u(subrelation1, subrelation2):
-    return query(Union(subrelation1, subrelation2))
+    Database.current.query(Union(subrelation1, subrelation2))
+    return Union(subrelation1, subrelation2).compile()
 
 
 def d(subrelation1, subrelation2):
-    return query(Diff(subrelation1, subrelation2))
+    Database.current.query(Diff(subrelation1, subrelation2))
+    return Diff(subrelation1, subrelation2).compile()
