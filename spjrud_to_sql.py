@@ -16,9 +16,12 @@ def set_db(db_name, ext='.db'):
     Database.current = Database(db_name, ext)
     conn = sql.connect(db_name+ext)
     c = conn.cursor()
+    Database.current.conn = conn
     Database.current.c = c
     return c
 
+def commit():
+    Database.current.conn.commit()
 
 def create_table(table_name, spjrud_query):
     Database.current.c.execute(
