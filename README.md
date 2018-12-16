@@ -29,35 +29,35 @@ The result of the difference operation are tuples, which are present in the firs
 Here is an example of how the project is supposed to be used in interactive mode : 
 
 #### Import the module and set the database.
-A function is included to set a database cursor. By default, the extension of the databases files is '.db' but a custom extension can be set as a second parameter for the function.
+A function is included to set a database. By default, the extension of the databases files is '.db' but a custom extension can be set as a second parameter for the function.
 
 ```python
 >>> from spjrud_to_sql import *
->>> c = set_db('database')
+>>> set_db('database')
 ```
 A file called "database.db" will then be created.
 #### Fill or create a database.
-If the database is empty, it can be filled with the given cursor.
+If the database is empty, it can be filled with the given function with normal SQLite queries.
 ```python
->>> c.execute(''' CREATE TABLE Rouge (A TEXT, B TEXT, C NUMERIC)''')
->>> c.execute("INSERT INTO Rouge VALUES ('abc', 'klm', 1)")
->>> c.execute("INSERT INTO Rouge VALUES ('def', 'nop', 2)")
->>> c.execute("INSERT INTO Rouge VALUES ('hij', 'qrs', 3)")
+>>> execute(''' CREATE TABLE Rouge (A TEXT, B TEXT, C NUMERIC)''')
+>>> execute("INSERT INTO Rouge VALUES ('abc', 'klm', 1)")
+>>> execute("INSERT INTO Rouge VALUES ('def', 'nop', 2)")
+>>> execute("INSERT INTO Rouge VALUES ('hij', 'qrs', 3)")
 ```
-Additionally, the `create_table()` function can be used to create a table based on another table which already exists by using the provided relational algebra functions explained below.
+Additionally, the `create_table()` function can be used to create a table based on another table which already exists by using the provided relational algebra operations explained below.
 ```python
 >>> create_table('Magenta', s(Attr('A'), Cst('abc'), Rel('Rouge')))
-[('abc', 'klm', 1)]
 Table Magenta successfully created.
+[('abc', 'klm', 1)]
 ```
 #### SPJRUD operations.
-From now the provided relational algebra operations can be used. Each operations can be used with a provided function which simply is the first letter of the operation. The `Relation`, `Attribute` and `Constant` objects can be respectively instanciate by `Rel()`, `Attr()` and `Cst()`.  So, for example, if you want to project the attribute A in the relation called 'Rouge' :
+Each operations can be used within `the execute()` function by typing the first letter of the operation. The `Relation`, `Attribute` and `Constant` objects can be respectively instanciate by `Rel()`, `Attr()` and `Cst()`.  So, for example, if you want to project the attribute A in the relation called 'Rouge' :
 ```python
->>> p([Attr('A')], Rel('Rouge'))
+>>> execute(P([Attr('A')], Rel('Rouge')))
 [('abc',), ('def',), ('hij',)]
 ```
 It will automatically print the output of the query.
-If you want to get the last output, you can get it with the `Database.current.output` variable.
+If you want to get the last output printed, you can get it with the `Database.current.output` variable.
 
 ## Operation's arguments
 
