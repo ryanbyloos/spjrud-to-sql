@@ -29,7 +29,7 @@ The result of the difference operation are tuples, which are present in the firs
 Here is an example of how the project is supposed to be used in interactive mode : 
 
 #### Import the module and set the database.
-A function is included to set a database. By default, the extension of the databases files is '.db' but a custom extension can be set as a second parameter for the function.
+A function `set_db()` is included to set a database. By default, the extension of the databases files is '.db' but a custom extension can be set as a second parameter for the function.
 
 ```python
 >>> from spjrud_to_sql import *
@@ -46,7 +46,7 @@ If the database is empty, it can be filled with the given function with normal S
 ```
 Additionally, the `create_table()` function can be used to create a table based on another table which already exists by using the provided relational algebra operations explained below.
 ```python
->>> create_table('Magenta', s(Attr('A'), Cst('abc'), Rel('Rouge')))
+>>> create_table('Magenta', S(Attr('A'), Cst('abc'), Rel('Rouge')))
 Table Magenta successfully created.
 [('abc', 'klm', 1)]
 ```
