@@ -16,13 +16,13 @@ class Rename(Relation):
     def check_args(self):
 
         if not isinstance(self.attr, Attribute):
-            raise TypeError('The first argument must be an attribute.')
+            raise Exception('The first argument must be an attribute.')
 
         if not isinstance(self.new_name, str):
-            raise TypeError('The new name must be a string.')
+            raise Exception('The new name must be a string.')
 
         if not isinstance(self.subrelation, Relation):
-            raise TypeError('The subrelation must be a Relation.')
+            raise Exception('The subrelation must be a Relation.')
 
         self.column_list = self.get_column_list()
 

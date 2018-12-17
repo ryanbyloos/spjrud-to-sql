@@ -8,7 +8,7 @@ class Relation():
     def check_args(self):
 
         if not isinstance(self.name, str):
-            raise TypeError("A relation name must be a string.")
+            raise Exception("A relation name must be a string.")
 
     def compile(self):
         return self.name

@@ -11,7 +11,7 @@ class Diff(Relation):
 
     def check_args(self):
         if not (isinstance(self.subrelation1, Relation) or isinstance(self.subrelation2, Relation)):
-            raise TypeError('The subrelations must be relations')
+            raise Exception('The subrelations must be relations')
 
         argtype = {}
 
@@ -30,11 +30,11 @@ class Diff(Relation):
         len_r2 = len(r2)
 
         if len_r1 != len_r2:
-            raise ValueError(
+            raise Exception(
                 'The two subrelations must have the same amount of columns.')
         for i in range(len_r2):
             if r1[i][2] != r2[i][2] or r1[i][1] != r2[i][1]:
-                raise TypeError(
+                raise Exception(
                     'The elements of the two subrelations must be the same.')
 
     def compile(self):

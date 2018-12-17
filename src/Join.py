@@ -11,7 +11,7 @@ class Join(Relation):
 
     def check_args(self):
         if not (isinstance(self.subrelation1, Relation) or isinstance(self.subrelation2, Relation)):
-            raise TypeError('The subrelations must be relations')
+            raise Exception('The subrelations must be relations')
 
         argtype = {}
         Database.current.c.execute("DROP TABLE IF EXISTS tmp1")
@@ -28,7 +28,7 @@ class Join(Relation):
         for i in r1:
             for j in r2:
                 if i[1] == j[1] and i[2] != j[2]:
-                    raise TypeError(
+                    raise Exception(
                         'Two columns with the same name doesn\'t have the same type')
 
     def compile(self):

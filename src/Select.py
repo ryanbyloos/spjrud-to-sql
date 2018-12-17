@@ -13,7 +13,7 @@ class Select(Relation):
 
     def check_args(self):
         if not isinstance(self.subrelation, Relation):
-            raise TypeError('The subrelation must be a relation.')
+            raise Exception('The subrelation must be a relation.')
         Database.current.c.execute("DROP TABLE IF EXISTS tmp")
         Database.current.c.execute(
             "CREATE TABLE tmp AS SELECT * FROM ({0})".format(self.subrelation.compile()))
@@ -23,21 +23,17 @@ class Select(Relation):
         for i in arglist:
             argtype[i[1]] = i[2]
         if not isinstance(self.attr1, Attribute):
-            raise TypeError('The first argument must be an attribute.')
+            raise Exception('The first argument must be an attribute.')
         if not (isinstance(self.attr2, Attribute) or isinstance(self.attr2, Constant)):
-            raise TypeError(
+            raise Exception(
                 'The second argument must be either an argument or a constant.')
         if isinstance(self.attr2, Attribute) and not argtype[self.attr1.name] == argtype[self.attr2.name]:
-            raise TypeError(
+            raise Exception(
                 'The first attribute doesn\'t match the second one.')
-        try:
-            argtype[self.attr1.name]
-        except KeyError:
+        if self.attr1.name not in argtype:
             raise Exception(self.attr1.name+' isn\'t in the relation.')
         if isinstance(self.attr2, Attribute):
-            try:
-                argtype[self.attr2.name]
-            except KeyError:
+            if self.attr2.name not in argtype:
                 raise Exception(self.attr2.name+' isn\'t in the relation.')
 
     def compile(self):

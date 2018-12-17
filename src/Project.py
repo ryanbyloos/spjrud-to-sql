@@ -6,28 +6,26 @@ from src.Database import Database, current
 class Project(Relation):
 
     def __init__(self, attr_list, subrelation):
-
         self.subrelation, self.attr_list = subrelation, attr_list
         self.check_args()
-
         self.attr = ""
         for e in self.attr_list:
             self.attr += e.name
             self.attr += ", "
-        self.attr = self.attr[:-2]  # There is one useless ", "
+        self.attr = self.attr[:-2]
 
     def check_args(self):
 
         if not isinstance(self.attr_list, list):
-            raise TypeError('The first argument must be a list of attributes.')
+            raise Exception('The first argument must be a list of attributes.')
 
         for e in self.attr_list:
             if not isinstance(e, Attribute):
-                raise TypeError(
+                raise Exception(
                     'The first argument must be a list of attributes.')
 
         if not isinstance(self.subrelation, Relation):
-            raise TypeError('The subrelation must be a relation.')
+            raise Exception('The subrelation must be a relation.')
 
         argtype = {}
         Database.current.c.execute("DROP TABLE IF EXISTS tmp")
@@ -39,9 +37,7 @@ class Project(Relation):
         for i in arglist:
             argtype[i[1]] = i[2]
         for j in self.attr_list:
-            try:
-                argtype[j.name]
-            except KeyError:
+            if j.name not in argtype:
                 raise Exception(j.name+' isn\'t in the relation.')
 
     def compile(self):
