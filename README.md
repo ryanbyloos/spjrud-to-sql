@@ -46,8 +46,8 @@ If the database is empty, it can be filled with the given function with normal S
 ```
 Additionally, the `create_table()` function can be used to create a table based on another table which already exists by using the provided relational algebra operations explained below.
 ```python
->>> create_table('Magenta', S(Attr('A'), Cst('abc'), Rel('Rouge')))
-Table Magenta successfully created.
+>>> create_table('Cyan', S(Attr('A'), Cst('abc'), Rel('Rouge')))
+Table Cyan successfully created.
 [('abc', 'klm', 1)]
 ```
 #### SPJRUD operations.
