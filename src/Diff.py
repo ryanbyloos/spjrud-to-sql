@@ -38,4 +38,4 @@ class Diff(Relation):
                     'The elements of the two subrelations must be the same.')
 
     def compile(self):
-        return "SELECT * FROM {0} EXCEPT SELECT * FROM ({1})".format(self.subrelation1.compile(), self.subrelation2.compile())
+        return "SELECT * FROM ({0}) EXCEPT SELECT * FROM ({1})".format(self.subrelation1.compile(), self.subrelation2.compile())
